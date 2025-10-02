@@ -1,0 +1,23 @@
+# Arduino build files
+*.elf
+*.hex
+*.bin
+*.eep
+*.obj
+*.d
+
+# Node.js dependencies
+node_modules/
+npm-debug.log
+.env
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE settings
+.vscode/
+.idea/

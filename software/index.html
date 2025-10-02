@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automated Rain Protection System</title>
+</head>
+<body>
+  <h1>Automated Rain Protection System</h1>
+  <div id="status">Connection Status: <span id="connectionStatus">Disconnected</span></div>
+
+  <div id="controls">
+    <button onclick="sendCommand('ON')">Activate System</button>
+    <button onclick="sendCommand('OFF')">Deactivate System</button>
+  </div>
+
+  <h2>Real-Time Data</h2>
+  <p id="serialData">Waiting for data...</p>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+
+    socket.on("connect", () => {
+      document.getElementById("connectionStatus").innerText = "Connected";
+    });
+
+    socket.on("disconnect", () => {
+      document.getElementById("connectionStatus").innerText = "Disconnected";
+    });
+
+    socket.on("data", (data) => {
+      document.getElementById("serialData").innerText = data;
+    });
+
+    function sendCommand(cmd) {
+      socket.emit("command", cmd);
+    }
+  </script>
+</body>
+</html>
